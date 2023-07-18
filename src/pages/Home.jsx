@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 const Home = () => {
   return (
     <div>
-      Home Page of App
+      Home Page
       <br />
       <Link to="/starred">Go to Starred Page</Link>
     </div>
