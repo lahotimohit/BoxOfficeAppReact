@@ -8,6 +8,7 @@ const ShowsGrid = ({ shows }) => {
           key={data.show.id}
           name={data.show.name}
           summary={data.show.summary}
+          id={data.show.id}
           image={
             data.show.image ? data.show.image.medium : '/not-found-img.png'
           }
