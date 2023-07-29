@@ -3,6 +3,11 @@ const SerachForm = ({ onSearch }) => {
   const [searchOption, setSearchOption] = useState('shows');
   const [searchStr, setSearchStr] = useState('');
 
+  //1.mounts
+  //2.rerender
+  //2.5 Logic before next rerender.
+  //3.unmounts
+
   const onSearchInputChange = ev => {
     setSearchStr(ev.target.value);
   };
