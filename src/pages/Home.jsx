@@ -1,27 +1,25 @@
 import { useState } from 'react';
+import { useQuery } from '@tanstack/react-query';
 import { searchForShows, searchForActors } from '../api/tvmaze';
 import SerachForm from '../components/SearchForm';
 import ShowsGrid from '../components/shows/ShowsGrid';
 import ActorsGrid from '../components/actors/ActorsGrid';
 
 const Home = () => {
-  const [apiData, setApiData] = useState(null);
-  const [apiError, setApiError] = useState(null);
+  const [filter, setFilter] = useState(null);
+
+  const { data: apiData, error: apiError } = useQuery({
+    queryKey: ['search', filter],
+    queryFn: () =>
+      filter.searchOption === 'shows'
+        ? searchForShows(filter.q)
+        : searchForActors(filter.q),
+    enabled: !!filter,
+    refetchOnWindowFocus: false,
+  });
 
   const onSearch = async ({ q, searchOption }) => {
-    try {
-      setApiError(null);
-
-      let result;
-      if (searchOption == 'shows') {
-        result = await searchForShows(q);
-      } else {
-        result = await searchForActors(q);
-      }
-      setApiData(result);
-    } catch (error) {
-      setApiError(error);
-    }
+    setFilter({ q, searchOption });
   };
 
   const renderApi = () => {
