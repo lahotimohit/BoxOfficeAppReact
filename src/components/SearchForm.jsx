@@ -1,7 +1,8 @@
 import { useState } from 'react';
+import { useSearhStr } from '../lib/useSearchStr';
 const SerachForm = ({ onSearch }) => {
   const [searchOption, setSearchOption] = useState('shows');
-  const [searchStr, setSearchStr] = useState('');
+  const [searchStr, setSearchStr] = useSearhStr();
 
   //1.mounts
   //2.rerender
