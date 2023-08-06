@@ -1,11 +1,9 @@
 import { useStarredShows } from '../../lib/useStarredShows';
 import ShowsCard from './ShowsCard';
-import { useEffect, useReducer } from 'react';
 
 const ShowsGrid = ({ shows }) => {
   const [starredShows, dispatchStarred] = useStarredShows();
 
-  console.log(starredShows);
   const onStarMeClick = showId => {
     const isStarred = starredShows.includes(showId);
 
