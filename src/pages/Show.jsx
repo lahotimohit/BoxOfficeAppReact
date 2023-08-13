@@ -3,8 +3,10 @@ import { useParams, Link } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import ShowMainData from '../components/shows/ShowMainData';
 import Details from '../components/shows/Details';
+import styled from 'styled-components';
 import Seasons from '../components/shows/Seasons';
 import Cast from '../components/shows/Cast';
+import { TextCenter } from '../components/common/TextCenter';
 
 // const useShowById = showId => {
 //   const [showData, setShowData] = useState(null);
@@ -35,41 +37,77 @@ const Show = () => {
   });
 
   if (showError) {
-    return <div>Error: {showError.message}</div>;
+    return <TextCenter>Error: {showError.message}</TextCenter>;
   }
 
   if (showData) {
     return (
       <div>
-        <Link to={'/'}>Go to Home</Link>
-        <ShowMainData
-          image={showData.image}
-          name={showData.name}
-          rating={showData.rating}
-          summary={showData.summary}
-          genres={showData.genres}
-        />
-        <div>
-          <h2>Details</h2>
-          <Details
-            status={showData.status}
-            premiered={showData.premiered}
-            network={showData.network}
+        <ShowPageWrapper>
+          <BackHomeWrapper>
+            <Link to={'/'}>Go to Home</Link>
+          </BackHomeWrapper>
+          <ShowMainData
+            image={showData.image}
+            name={showData.name}
+            rating={showData.rating}
+            summary={showData.summary}
+            genres={showData.genres}
           />
-        </div>
-        <div>
-          <h2>Seasons:</h2>
-          <Seasons seasons={showData._embedded.seasons} />
-        </div>
-        <div>
-          <h2>Cast</h2>
-          <Cast cast={showData._embedded.cast} />
-        </div>
+          <InfoBlock>
+            <h2>Details</h2>
+            <Details
+              status={showData.status}
+              premiered={showData.premiered}
+              network={showData.network}
+            />
+          </InfoBlock>
+          <InfoBlock>
+            <h2>Seasons:</h2>
+            <Seasons seasons={showData._embedded.seasons} />
+          </InfoBlock>
+          <InfoBlock>
+            <h2>Cast</h2>
+            <Cast cast={showData._embedded.cast} />
+          </InfoBlock>
+        </ShowPageWrapper>
       </div>
     );
   }
 
-  return <div>Please wait! Your data is loading... </div>;
+  return <TextCenter>Please wait! Your data is loading... </TextCenter>;
 };
 
 export default Show;
+
+const BackHomeWrapper = styled.div`
+  margin-bottom: 30px;
+  text-align: left;
+  a {
+    padding: 10px;
+    color: ${({ theme }) => theme.mainColors.dark};
+    text-decoration: none;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+`;
+
+const ShowPageWrapper = styled.div`
+  margin: auto;
+  @media only screen and (min-width: 768px) {
+    max-width: 700px;
+  }
+  @media only screen and (min-width: 992px) {
+    max-width: 900px;
+  }
+`;
+
+const InfoBlock = styled.div`
+  margin-bottom: 40px;
+  h2 {
+    margin: 0;
+    margin-bottom: 30px;
+    font-size: 22px;
+  }
+`;

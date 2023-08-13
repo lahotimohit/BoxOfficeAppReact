@@ -1,9 +1,12 @@
+import { SearchCard, SearchImgWrapper } from '../common/SearchCard';
 const ActorsCard = ({ name, image, country, birthday, gender, deathday }) => {
   return (
     <div>
-      <div>
-        <img src={image} />
-      </div>
+      <SearchCard>
+        <SearchImgWrapper>
+          <img src={image} />
+        </SearchImgWrapper>
+      </SearchCard>
       <h1>
         {name} {!!gender && `(${gender})`}
       </h1>

@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { searchForShows, searchForActors } from '../api/tvmaze';
 import SerachForm from '../components/SearchForm';
+import { TextCenter } from '../components/common/TextCenter';
 import ShowsGrid from '../components/shows/ShowsGrid';
 import ActorsGrid from '../components/actors/ActorsGrid';
 import styled, { css, ThemeProvider } from 'styled-components';
@@ -50,11 +51,11 @@ const Home = () => {
 
   const renderApi = () => {
     if (apiError) {
-      return <div>Error Message: {apiError.message}</div>;
+      return <TextCenter>Error Message: {apiError.message}</TextCenter>;
     }
 
     if (apiData?.length == 0) {
-      return <div>Not found any result....</div>;
+      return <TextCenter>Not found any result....</TextCenter>;
     }
 
     if (apiData) {
